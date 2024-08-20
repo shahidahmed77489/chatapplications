@@ -41,6 +41,17 @@ const UserPage = () => {
       password: "",
     });
   };
+  // /////// /////////// ///////////// //////////////// ////////////////////
+  const logInServer = async () => {
+    const loginServer = "https://chatapplications-46nt.onrender.com";
+    let getServerData = await axios.get(loginServer);
+    console.log(getServerData);
+  };
+
+  useEffect(() => {
+    logInServer();
+  }, []);
+  // /////// /////////// ///////////// //////////////// ////////////////////
   const signInHandler = async (e) => {
     e.preventDefault();
     try {
@@ -53,6 +64,11 @@ const UserPage = () => {
       const remainingUser = userInfo.filter((item) => item !== findUser);
       dispatch(addToStore(remainingUser));
       findUser ? navigate("/chatDashboard") : alert("password does not match");
+      //
+      if (findUser) {
+        logInServer();
+      }
+      //
     } catch (error) {
       throw error;
     }
